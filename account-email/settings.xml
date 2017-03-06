@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <pluginGroups>
+  </pluginGroups>
+
+  <proxies>
+  </proxies>
+
+<!-- 对私服的认证，便于部署构件到私服	begin   -->
+  <servers>
+    <server>
+      <id>releases</id>
+      <username>admin</username>
+      <password>admin123</password>
+    </server>
+    
+    <server>
+    	<id>snapshots</id>
+    	<username>admin</username>
+    	<password>admin123</password>
+    </server>
+  </servers>
+<!-- 对私服的认证，便于部署构件到私服	end   -->
+
+
+<!--  搭建nexus私服，对所有远程仓库的构件的下载请求，都只会通过私服	begin   -->
+
+  <mirrors>
+     <mirror>
+      <id>nexus</id>
+      <name>nexus personal repositories</name>
+      <mirrorOf>*</mirrorOf>
+      <url>http://localhost:8090/nexus-2.14.2-01/content/groups/public</url>
+    </mirror>
+  </mirrors>
+  
+  <profiles>
+    <profile>
+      <id>nexus</id>
+
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+      	<pluginRepository>
+      		<id>central</id>
+      		<url>http://central</url>
+      		<releases><enabled>true</enabled></releases>
+      		<snapshots><enabled>true</enabled></snapshots>
+      	</pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+  
+<!--  搭建nexus私服，对所有远程仓库的构件的下载请求，都只会通过私服	end   -->
+
+</settings>
